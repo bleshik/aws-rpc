@@ -1,0 +1,73 @@
+{
+  "author": "bleshik",
+  "bugs": {
+    "url": "https://github.com/bleshik/aws-rpc/issues"
+  },
+  "description": "The easiest way to deploy a plain old JS object as AWS Lambda",
+  "dependencies": {
+    "aws-lambda": "0.1.2",
+    "aws-sdk": "2.458.0",
+    "ctx4node": "1.1.3",
+    "jayson": "3.0.2",
+    "lodash": "4.17.11"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.25",
+    "@types/aws-sdk": "2.7.0",
+    "@types/jest": "24.0.13",
+    "@types/lodash": "4.14.129",
+    "@types/node": "12.0.2",
+    "cross-env": "5.2.0",
+    "jest": "24.8.0",
+    "rimraf": "2.6.3",
+    "ts-jest": "24.0.2",
+    "ts-loader": "6.0.1",
+    "tslint": "5.16.0",
+    "typescript": "3.4.5",
+    "uglify-es": "3.3.9",
+    "webpack": "4.31.0"
+  },
+  "homepage": "https://github.com/bleshik/aws-rpc#readme",
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/*.spec.(ts)"
+    ],
+    "transform": {
+      ".(ts)": "ts-jest"
+    }
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "rpc",
+    "aws-lambda"
+  ],
+  "license": "Unlicense",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "name": "aws-rpc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bleshik/aws-rpc.git"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc --declaration && npm run uglify",
+    "clean": "rimraf dist",
+    "deploy": "npm version patch && npm run build && npm publish",
+    "lint": "tslint ./src/**/*.ts ./test/**/*.ts",
+    "postversion": "git push origin master",
+    "pretest": "cross-env NODE_ENV=test npm build && npm run lint",
+    "start": "tsc -w",
+    "test": "jest",
+    "tsc": "tsc --declaration",
+    "uglify": "./node_modules/uglify-es/bin/uglifyjs build/index.js --keep-fnames --ecma 6 -o build/index.js"
+  },
+  "version": "1.0.0"
+}
